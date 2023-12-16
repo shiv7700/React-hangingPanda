@@ -1,9 +1,11 @@
-import Sample from "./components/Sample.jsx";
+import Class from "./components/Class";
+import Class2 from "./components/Class2";
 
 const App = () => {
   return (
     <>
-      <Sample />
+      {/* <Class /> */}
+      <Class2 />
     </>
   );
 };
