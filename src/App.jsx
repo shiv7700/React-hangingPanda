@@ -1,9 +1,9 @@
-import Sample from "./components/Sample.jsx";
+import Square from "./components/Board";
 
 const App = () => {
   return (
     <>
-      <Sample />
+      <Square />
     </>
   );
 };
