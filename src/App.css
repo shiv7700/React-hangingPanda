@@ -6,8 +6,23 @@ button {
   display: block;
 }
 
-.board-row {
+.board-row,
+.game {
   display: flex;
+}
+
+.game {
+  gap: 10%;
+}
+
+.game-info button {
+  font-size: 15px;
+  width: 150px;
+  height: 30px;
+}
+
+.game-info {
+  margin-top: 50px;
 }
 
 .status {
