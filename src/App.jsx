@@ -1,9 +1,9 @@
-import Sample from "./components/Sample.jsx";
+import Country from "./components/country";
 
 const App = () => {
   return (
     <>
-      <Sample />
+      <Country />
     </>
   );
 };
