@@ -1,9 +1,9 @@
-import Sample from "./components/Sample.jsx";
+import Thinking from "./components/Thinking.jsx";
 
 const App = () => {
   return (
     <>
-      <Sample />
+      <Thinking />
     </>
   );
 };
