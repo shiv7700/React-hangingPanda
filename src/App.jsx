@@ -1,11 +1,5 @@
-import Sample from "./components/Sample.jsx";
-
 const App = () => {
-  return (
-    <>
-      <Sample />
-    </>
-  );
+  return <h1>this setup is working</h1>;
 };
 
 export default App;
