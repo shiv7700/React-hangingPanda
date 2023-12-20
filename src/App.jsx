@@ -1,5 +1,15 @@
+import Header from "./components/Header";
+import Todo from "./components/Todo";
+import "bootstrap/dist/css/bootstrap.css";
+import "./App.css";
+
 const App = () => {
-  return <h1>this setup is working</h1>;
+  return (
+    <>
+      <Header />
+      <Todo />
+    </>
+  );
 };
 
 export default App;
