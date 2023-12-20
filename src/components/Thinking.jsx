@@ -2,12 +2,34 @@ import { useState } from "react";
 import data from "./data.json";
 import "../App.css";
 
-const App = () => {
+const ProductList = ({ category, text, stock }) => {
+  return (
+    <>
+      <h4 className="cat">{category}</h4>
+      <table></table>
+      {data
+        .filter(
+          (item) =>
+            item.category === category &&
+            item.name.toLowerCase().includes(text.toLowerCase()) &&
+            (stock ? item.stocked : true)
+        )
+        .map((val, i) => (
+          <tr key={i} className="price">
+            <td style={{ color: val.stocked ? "" : "red" }}>{val.name}</td>
+            <td>{val.price}</td>
+            <td>{val.stocked ? "in stock" : "out of stock"}</td>
+          </tr>
+        ))}
+    </>
+  );
+};
+
+const Thinking = () => {
   const [text, setText] = useState("");
   const [stock, setStock] = useState(false);
 
   const handleText = (e) => {
-    console.log(e.target.value);
     setText(e.target.value);
   };
 
@@ -17,21 +39,19 @@ const App = () => {
 
   return (
     <>
-      <h2 className="heading">Thinking in react Assignment</h2>
+      <h2 className="heading">Thinking in React Assignment</h2>
       <div className="main-container">
         <div>
+          <h6>Search bar</h6>
           <input
             type="text"
             value={text}
             onChange={handleText}
-            placeholder="search"
+            placeholder="search for ..."
             className="search"
           />
           <br />
           <div className="check">
-            <div>
-              <h5>Product in stocks</h5>
-            </div>
             <div className="checkbox-wrapper-45">
               <input
                 id="cbx-45"
@@ -50,44 +70,30 @@ const App = () => {
                 </div>
               </label>
             </div>
+            <div>
+              <h4>Product in stocks</h4>
+            </div>
           </div>
 
-          <h4>Fruits</h4>
-          {data
-            .filter((ele) => ele.category === "Fruits")
-            .filter((e) => e.name.toLowerCase().includes(text.toLowerCase()))
-            .filter((ele) => (stock ? ele.stocked : true))
-            .map((val, i) => {
-              return (
-                <div key={i} className="price">
-                  <p style={{ color: val.stocked ? "" : "red" }}>{val.name}</p>
-                  <p>{val.price}</p>
-                </div>
-              );
-            })}
-          <h4>Vegetables</h4>
-          {data
-            .filter((ele) => ele.category === "Vegetables")
-            .filter((e) => e.name.toLowerCase().includes(text.toLowerCase()))
-            .filter((ele) => (stock ? ele.stocked : true))
-            .map((val, i) => {
-              return (
-                <div key={i} className="price">
-                  <div>
-                    <p style={{ color: val.stocked ? "" : "red" }}>
-                      {val.name}
-                    </p>
-                  </div>
-                  <div>
-                    <p>{val.price}</p>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="details">
+            <div>
+              <h4>Name</h4>
+            </div>
+            <div>
+              <h4>Price</h4>
+            </div>
+            <div>
+              <h4>Stock</h4>
+            </div>
+          </div>
+
+          <ProductList category="Fruits" text={text} stock={stock} />
+
+          <ProductList category="Vegetables" text={text} stock={stock} />
         </div>
       </div>
     </>
   );
 };
 
-export default App;
+export default Thinking;
