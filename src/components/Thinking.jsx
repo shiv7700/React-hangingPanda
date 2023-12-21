@@ -57,7 +57,7 @@ const Thinking = () => {
             type="text"
             value={text}
             onChange={handleText}
-            placeholder="search for ..."
+            placeholder="search for product"
             className="search"
           />
           <br />

@@ -34,5 +34,29 @@
     "price": "$1",
     "stocked": true,
     "name": "Peas"
+  },
+  {
+    "category": "Fruits",
+    "price": "$3",
+    "stocked": true,
+    "name": "Orange"
+  },
+  {
+    "category": "Juice",
+    "price": "$5",
+    "stocked": true,
+    "name": "Orange Juice"
+  },
+  {
+    "category": "Juice",
+    "price": "$4",
+    "stocked": true,
+    "name": "Apple Juice"
+  },
+  {
+    "category": "Juice",
+    "price": "$6",
+    "stocked": false,
+    "name": "Grape Juice"
   }
 ]
