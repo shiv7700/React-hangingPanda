@@ -1,5 +1,10 @@
 [
-  { "category": "Fruits", "price": "$1", "stocked": true, "name": "Apple" },
+  {
+    "category": "Fruits",
+    "price": "$1",
+    "stocked": true,
+    "name": "Apple"
+  },
   {
     "category": "Fruits",
     "price": "$1",
@@ -24,5 +29,10 @@
     "stocked": false,
     "name": "Pumpkin"
   },
-  { "category": "Vegetables", "price": "$1", "stocked": true, "name": "Peas" }
+  {
+    "category": "Vegetables",
+    "price": "$1",
+    "stocked": true,
+    "name": "Peas"
+  }
 ]

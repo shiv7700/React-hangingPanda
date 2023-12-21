@@ -3,24 +3,31 @@ import data from "./data.json";
 import "../App.css";
 
 const ProductList = ({ category, text, stock }) => {
+  const filteredProducts = data.filter(
+    (item) =>
+      item.category === category &&
+      item.name.toLowerCase().includes(text.toLowerCase()) &&
+      (stock ? item.stocked : true)
+  );
+
+  if (filteredProducts.length === 0) {
+    return null;
+  }
+
   return (
     <>
-      <h4 className="cat">{category}</h4>
-      <table></table>
-      {data
-        .filter(
-          (item) =>
-            item.category === category &&
-            item.name.toLowerCase().includes(text.toLowerCase()) &&
-            (stock ? item.stocked : true)
-        )
-        .map((val, i) => (
-          <tr key={i} className="price">
-            <td style={{ color: val.stocked ? "" : "red" }}>{val.name}</td>
-            <td>{val.price}</td>
-            <td>{val.stocked ? "in stock" : "out of stock"}</td>
-          </tr>
-        ))}
+      <h4 className="cat">Category : {category}</h4>
+      <table>
+        <tbody>
+          {filteredProducts.map((val, i) => (
+            <tr key={i} className="price">
+              <td style={{ color: val.stocked ? "" : "red" }}>{val.name}</td>
+              <td>{val.price}</td>
+              <td>{val.stocked ? "in stock" : "out of stock"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 };
@@ -36,6 +43,9 @@ const Thinking = () => {
   const handleCheck = () => {
     setStock(!stock);
   };
+
+  const categories = [...new Set(data.map((item) => item.category))];
+  // [Fruits , Vegetables]
 
   return (
     <>
@@ -87,9 +97,12 @@ const Thinking = () => {
             </div>
           </div>
 
-          <ProductList category="Fruits" text={text} stock={stock} />
+          {/* <ProductList category="Fruits" text={text} stock={stock} />
+          <ProductList category="Vegetables" text={text} stock={stock} /> */}
 
-          <ProductList category="Vegetables" text={text} stock={stock} />
+          {categories.map((cat, index) => (
+            <ProductList key={index} category={cat} text={text} stock={stock} />
+          ))}
         </div>
       </div>
     </>
