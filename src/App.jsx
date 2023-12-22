@@ -1,5 +1,20 @@
-const App = () => {
-  return <h1>this setup is working</h1>;
-};
+import React, { Component } from "react";
+import TodDo from "./components/ToDo";
+import Header from "./components/Header";
+import "./App.css";
+import Add from "./components/Add";
 
-export default App;
+export default class App extends React.Component {
+  constructor() {
+    super();
+  }
+  render() {
+    return (
+      <>
+        <Header />
+        {/* <TodDo /> */}
+        <Add />
+      </>
+    );
+  }
+}
