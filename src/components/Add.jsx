@@ -7,7 +7,6 @@ export default class Add extends React.Component {
       text: "",
       task: [],
       searchValid: false,
-      editingTaskId: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,9 +23,9 @@ export default class Add extends React.Component {
     e.preventDefault();
     if (this.state.text.trim() === "") {
       this.setState({ text: "" });
-      // alert("text is empty , please enter text 🥺🥺🥺");
+      alert("text is empty , please enter text 🥺🥺🥺");
       this.setState({ searchValid: true });
-      return null;
+      return;
     }
     this.setState({ searchValid: false });
     this.setState({ text: "" });
@@ -48,7 +47,6 @@ export default class Add extends React.Component {
       task.id === elementID ? { ...task, status: !task.status } : task
     );
     this.setState({ task: updatedTasks });
-    console.log(updatedTasks);
   }
 
   edit(elementID) {
