@@ -6,11 +6,14 @@ export default class Add extends React.Component {
     this.state = {
       text: "",
       task: [],
+      searchValid: false,
+      editingTaskId: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.remove = this.remove.bind(this);
     this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+    this.edit = this.edit.bind(this);
   }
 
   handleChange(e) {
@@ -21,9 +24,11 @@ export default class Add extends React.Component {
     e.preventDefault();
     if (this.state.text.trim() === "") {
       this.setState({ text: "" });
-      alert("text is empty");
+      // alert("text is empty , please enter text 🥺🥺🥺");
+      this.setState({ searchValid: true });
       return null;
     }
+    this.setState({ searchValid: false });
     this.setState({ text: "" });
     const newTask = {
       id: this.randomNumber(),
@@ -43,6 +48,16 @@ export default class Add extends React.Component {
       task.id === elementID ? { ...task, status: !task.status } : task
     );
     this.setState({ task: updatedTasks });
+    console.log(updatedTasks);
+  }
+
+  edit(elementID) {
+    const updatedElement = this.state.task.map((e) =>
+      e.id === elementID
+        ? { id: elementID, taskName: "updated", status: false }
+        : e
+    );
+    this.setState({ task: updatedElement });
   }
 
   randomNumber = () => {
@@ -54,6 +69,7 @@ export default class Add extends React.Component {
   render() {
     return (
       <div className="mt-4 ms-3">
+        {/* form for taking input */}
         <form onSubmit={this.handleSubmit}>
           <label className="me-3">Add Another Task - </label>
           <input
@@ -62,6 +78,11 @@ export default class Add extends React.Component {
             type="text"
             placeholder="enter new task ..."
             className="p-1 input-value rounded-3"
+            style={{
+              border: this.state.searchValid
+                ? "2px solid red"
+                : "2px solid black",
+            }}
           />
           <input
             type="submit"
@@ -70,6 +91,15 @@ export default class Add extends React.Component {
           />
         </form>
 
+        {/* error if search is empty */}
+        {/* {this.state.searchValid ? <div>error</div> : ""} */}
+        {this.state.searchValid && (
+          <div className="text-danger fw-bold p-0 m-0">
+            text is empty please enter text 🥺🥺🥺
+          </div>
+        )}
+
+        {/* container to show result */}
         <div className="d-flex justify-content-center">
           <div className="result">
             {this.state.task.map((element) => {
@@ -77,6 +107,7 @@ export default class Add extends React.Component {
                 <div
                   key={element.id}
                   className="d-flex task justify-content-between px-3 py-2 m-3 rounded-4"
+                  style={{ backgroundColor: element.status ? "#ff000047" : "" }}
                 >
                   <div>
                     <div className="checkbox-wrapper-46">
@@ -127,6 +158,14 @@ export default class Add extends React.Component {
                       className="badge bg-success remove p-2"
                     >
                       Remove Task
+                    </span>
+                  </div>
+                  <div>
+                    <span
+                      className="badge bg-success remove p-2"
+                      onClick={() => this.edit(element.id)}
+                    >
+                      Edit Task
                     </span>
                   </div>
                 </div>
