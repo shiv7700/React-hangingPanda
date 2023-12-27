@@ -28,6 +28,17 @@ export default class Add extends React.Component {
       return;
     }
     this.setState({ searchValid: false });
+    if (
+      this.state.task.filter(
+        (findTask) => findTask.taskName === this.state.text
+      ).length > 0
+    ) {
+      alert(
+        `The task ${this.state.text} already exists in the task list. Please choose a different name.`
+      );
+      this.setState({ text: "" });
+      return;
+    }
     this.setState({ text: "" });
     const newTask = {
       id: this.randomNumber(),
@@ -38,8 +49,18 @@ export default class Add extends React.Component {
   }
 
   remove(elementID) {
-    const newResult = this.state.task.filter((e) => e.id !== elementID);
-    this.setState({ task: newResult });
+    const particularTask = this.state.task.filter((le) => le.id === elementID);
+    if (particularTask[0].status === false) {
+      let ans = confirm("You are removing an incomplete task");
+      if (ans === true) {
+        const newResult = this.state.task.filter((e) => e.id !== elementID);
+        this.setState({ task: newResult });
+      }
+    }
+    if (particularTask[0].status === true) {
+      const newResult = this.state.task.filter((e) => e.id !== elementID);
+      this.setState({ task: newResult });
+    }
   }
 
   handleCheckboxChange(elementID) {
@@ -50,12 +71,7 @@ export default class Add extends React.Component {
   }
 
   edit(elementID) {
-    const updatedElement = this.state.task.map((e) =>
-      e.id === elementID
-        ? { id: elementID, taskName: "updated", status: false }
-        : e
-    );
-    this.setState({ task: updatedElement });
+    console.log("edited");
   }
 
   randomNumber = () => {
@@ -97,16 +113,16 @@ export default class Add extends React.Component {
           </div>
         )}
 
-        {/* container to show result */}
-        <div className="d-flex justify-content-center">
-          <div className="result">
-            {this.state.task.map((element) => {
-              return (
-                <div
-                  key={element.id}
-                  className="d-flex task justify-content-between px-3 py-2 m-3 rounded-4"
-                  style={{ backgroundColor: element.status ? "#ff000047" : "" }}
-                >
+        {/* container to show result  */}
+        <div className="container">
+          {this.state.task.map((element) => {
+            return (
+              <div
+                key={element.id}
+                className="custom-border row px-3 py-2 m-3 rounded-4"
+                style={{ backgroundColor: element.status ? "#ff000047" : "" }}
+              >
+                <div className="col-3">
                   <div>
                     <div className="checkbox-wrapper-46">
                       <input
@@ -126,6 +142,8 @@ export default class Add extends React.Component {
                       </label>
                     </div>
                   </div>
+                </div>
+                <div className="col-3">
                   <div>
                     Task Name :{" "}
                     {element.status ? (
@@ -142,34 +160,42 @@ export default class Add extends React.Component {
                       <span className="fw-bold">{element.taskName}</span>
                     )}
                   </div>
+                </div>
+                <div className="col">
                   <div>
                     Status :{" "}
                     {element.status ? (
-                      <span className="badge bg-primary p-2">Completed</span>
+                      <span className="badge bg-success p-2">Completed</span>
                     ) : (
-                      <span className="badge bg-danger p-2">Incomplete</span>
+                      <span className="badge bg-primary p-2">Incomplete</span>
                     )}
                   </div>
+                </div>
+                <div className="col">
                   <div>
+                    Remove :{" "}
                     <span
                       onClick={() => this.remove(element.id)}
-                      className="badge bg-success remove p-2"
+                      className="badge bg-danger remove p-2"
                     >
                       Remove Task
                     </span>
                   </div>
+                </div>
+                <div className="col">
                   <div>
+                    Edit :{" "}
                     <span
-                      className="badge bg-success remove p-2"
+                      className="badge bg-secondary remove p-2"
                       onClick={() => this.edit(element.id)}
                     >
                       Edit Task
                     </span>
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     );

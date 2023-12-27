@@ -1,17 +1,17 @@
 [
   {
     "id": 1,
-    "task": "Buy groceries",
+    "taskName": "Buy groceries",
     "completed": false
   },
   {
     "id": 2,
-    "task": "Read a book",
+    "taskName": "Read a book",
     "completed": false
   },
   {
     "id": 3,
-    "task": "Write a blog post",
+    "taskName": "Write a blog post",
     "completed": false
   }
 ]

@@ -21,6 +21,10 @@
   border: 2px solid black;
 }
 
+.custom-border {
+  border: 2px solid black;
+}
+
 .result {
   width: 70%;
 }
